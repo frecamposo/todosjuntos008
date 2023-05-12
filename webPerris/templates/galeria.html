@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block contenido %}
+    <!-- bienvenidos -->
+        <section id="bienvenido">
+            <h2>Galeria de mascotas que buscan un hogar</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, quas eius consequatur maiores ratione, tenetur corrupti consequuntur odio vero commodi illo a aperiam. Sequi mollitia praesentium modi distinctio ullam maiores!</p>            
+        </section>
+        <!-- blog de perritos-->
+        <section id="blog">
+
+            <form action="{% url 'BUSCAR_NOM' %}" method="post">
+                {% csrf_token %}
+                Buscar por nombre:
+                <input type="text" name="txtMascota" id="txtMascota">
+                <input type="submit" value="Buscar">
+            </form>
+
+            <form action="{% url 'BUSCAR_PAL' %}" method="post">
+                {% csrf_token %}
+                Buscar por palabra clave:
+                <input type="text" name="txtDesc" id="txtDesc">
+                <input type="submit" value="Buscar">
+            </form>
+
+            <h3>Lo ultimo de nuestro stock de mascotas</h3>
+            <div class="contenedor">
+                {% for item in mascotas %}                                
+                <article>
+                    <img src="{{item.foto.url}}" alt="">
+                    <h4>{{item.nombre}}</h4>
+                    <h4>{{item.descripcion}}</h4>
+                    <h4> <a href="{% url 'FICH_MAS' item.idMascota %}">Ver Ficha</a> </h4>
+                </article>
+                {% endfor %}
+            </div>
+            <h2 style="text-align: center;">{{cantidad}}</h2>
+        </section>
+{% endblock contenido %}

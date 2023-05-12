@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block contenido %}
+    <!-- bienvenidos -->
+        <section id="bienvenido">
+            <h2>Ficha de mascota que busca un hogar</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, quas eius consequatur maiores ratione, tenetur corrupti consequuntur odio vero commodi illo a aperiam. Sequi mollitia praesentium modi distinctio ullam maiores!</p>            
+        </section>
+        <!-- blog de perritos-->
+        <section id="blog">
+            <div class="contenedor">                           
+                <article>
+                    <img src="{{mascota.foto.url}}" alt="">
+                    <h4>{{mascota.nombre}}</h4>
+                    <h4>{{mascota.descripcion}}</h4>
+                </article>
+            </div>
+            
+        </section>
+{% endblock contenido %}

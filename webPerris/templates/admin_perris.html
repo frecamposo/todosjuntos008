@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}
+<script src="{% static 'js/jquery-3.6.4.min.js' %}"></script>
+{% endblock css %}
+
+{% block contenido %}
+        <!-- bienvenidos -->
+        <section id="bienvenido">
+            <h2>Administrador de Mascotas: {{user.first_name}} {{user.last_name}}</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, quas eius consequatur maiores ratione, tenetur corrupti consequuntur odio vero commodi illo a aperiam. Sequi mollitia praesentium modi distinctio ullam maiores!</p>            
+            <center>{{user.username}}</center>
+        </section>
+        <!-- formulario ingreso adopcion-->
+        <div style="text-align: center;font-size: xx-large;">
+            {{mensaje}}
+        </div>   
+        <section id="formulario">            
+            <form action="{% url 'ADM_PERRIS' %}" method="post" enctype="multipart/form-data" >
+                 {% csrf_token %}
+                <h1>Ingrese Datos Mascota</h1>
+                <div class="contenedor-input">                    
+                    <input type="text" placeholder="ingrese nombre" class="col-g" name="txtNombre" id="txtNombre">
+                    <input type="number" placeholder="ingrese edad" class="col-p" name="txtEdad" id="txtEdad">
+                    <input type="text" placeholder="ingrese raza" class="col-p" name="txtRaza" id="txtRaza">
+                    <textarea class="col-g" name="txtDesc" id="txtDesc" cols="30" rows="10">                        
+                    </textarea>
+                    <input class="col-g" type="file" name="txtImg" id="txtImg">
+                    <select class="col-g" name="cboCategoria" id="cboCategoria">
+                        {% for item in categorias %}
+                            <option value="{{item.nombre}}">{{item.nombre}}</option>
+                        {% endfor %}                        
+                    </select>
+                    <input type="submit" class="col-p" value="Enviar">
+                    <input type="reset" class="col-p" value="Limpiar">
+                    
+                </div>
+            </form>
+        </section>
+        <section>
+            <div>
+                <table border="2">
+                    <tr>
+                        <td>Num</td>
+                        <td>Nombre</td>
+                        <td>Raza</td>
+                        <td>Foto</td>
+                        <td>Publicado</td>
+                    </tr>
+                    {% for item in mascotas %}                                        
+                    <tr>
+                        <td>{{item.idMascota}}</td>
+                        <td>{{item.nombre}}</td>
+                        <td>{{item.raza}}</td>
+                        <td>
+                            <img src="{{item.foto.url}}">
+                        </td>
+                        <td>
+                            {{item.publicado}}
+                        </td>
+                    </tr>                    
+                    {% endfor %}
+                </table>
+
+            </div>
+        </section>
+{% endblock contenido %}        
+  
+  {% block js %}
+  <script src="{% static 'js/validaciones.js' %}"></script>
+  {% endblock js %}
+    

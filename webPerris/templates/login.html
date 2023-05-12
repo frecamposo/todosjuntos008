@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}
+<script src="{% static 'js/jquery-3.6.4.min.js' %}"></script>
+{% endblock css %}
+
+{% block contenido %}
+             
+        <div style="text-align: center;font-size: xx-large;">
+            {{mensaje}}
+        </div>   
+        <section id="formulario">            
+            <form action="{% url 'LOGIN' %}" method="post" enctype="multipart/form-data" >
+                 {% csrf_token %}
+                <h1>Login</h1>
+                <div class="contenedor-input">
+                    <input type="text" placeholder="ingrese usuario" class="col-p" name="txtUser" id="txtUser">
+                    <input type="password" placeholder="ingrese pass" class="col-p" name="txtPass" id="txtPass">
+                    <input type="submit" value="Login">
+                </div>
+            </form>
+        </section>
+{% endblock contenido %}        
+  
